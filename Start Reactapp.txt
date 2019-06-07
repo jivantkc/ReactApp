@@ -1,0 +1,115 @@
+START REACT APP
+//Install node.js ist
+//Install Atom editor
+//Then Follow as following:
+
+
+DO FOLLOWINGS IN TERMINAL
+
+cd desktop
+mkdir reactapp
+cd reactapp
+
+//Initialiase Node
+npm init -y
+
+
+//Install webpackages
+npm i -D webpack webpack-cli
+
+///To install React app dev server 
+npm i -D webpack-dev-server
+
+///Install Babel
+npm i -D @babel/core babel-loader @babel/preset-env @babel/preset-react babel-plugin-transform-class-properties
+
+///Install React  and React DOM
+npm i react react-dom prop-types
+
+
+NOW DO FOLLOWINGS IN ATOM OR OTHER TEXT EDITORS
+
+Atom>File>Add Project Folder>Select your folder which was created from above on desktop.
+
+
+/// Create new file 
+.babelrc
+
+/// Inside .babelrc file below code
+{
+  "presets":["@babel/preset-env", "@babel/preset-react"],
+  "plugins":["transform-class-properties"]
+}
+
+
+///Create webpack.config.js 
+module.exports={
+  module:{
+    rules:[{
+      test: /\.js$/,
+      exclude: /node-modules/,
+      use: {
+        loader: "babel-loader"
+      }
+    }
+  ]
+  }
+}
+
+
+///inside package.json  update scripts as below ./reactapp/index.js this is tarting point of app and output of js will be at ./reactapp/main.js from following codes.
+
+"scripts": {
+    "dev": "webpack --mode development ./index.js --output ./main.js",
+    "build": "webpack --mode production ./index.js --output ./main.js",
+    "start": "webpack-dev-server --hot ./index.js"
+  },
+
+/// Create index.js  for above…. in required folder and codes as below.
+import App from './components/App';
+
+
+/// Create components folder and create App.js file
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+
+class App extends Component{
+  render(){
+    return(<div>Hellow</div>)
+    
+  }
+}
+
+ReactDOM.render(
+  <App />, document.getElementById('app')
+);
+
+
+
+/// Create HTML to display rendered info
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>React App</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/simplex/bootstrap.min.css">
+  </head>
+  <body>
+    <div id="app">
+
+    </div>
+
+     <script type="text/javascript" src="main.js">
+     </script>
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+/// NOW IN TERMINAL you must be in same folder as app
+ 
+npm start
+
+
